@@ -41,6 +41,10 @@ void Turn()
  
 	while (true)
 	{
+		if (battlePower[0].battleStatus.battlePower < 0 || battlePower[1].battleStatus.battlePower < 0)
+		{
+			break;
+		}
 		//playerのキャラクターを選択する
 		//入力されたキーで異なるキャラクターを使用する配列の中に入れるため-1
 		player = playerPtr->InputCharacterKey();
@@ -156,7 +160,7 @@ void Turn()
 		}
 
 		//倒したか確認する
-		if (battlePower[0].battleStatus.battlePower < 0)
+		if (battlePower[0].battleStatus.battlePower < 0 || battlePower[1].battleStatus.battlePower < 0)
 		{
 			if (battlePower[0].battleStatus.battlePower > battlePower[1].battleStatus.battlePower)
 			{
@@ -165,11 +169,6 @@ void Turn()
 
 				result.Die(winner);
 			}
-		}
-
-
-		if (battlePower[1].battleStatus.battlePower < 0)
-		{
 			if (battlePower[0].battleStatus.battlePower < battlePower[1].battleStatus.battlePower)
 			{
 				//enemyの勝利
@@ -177,7 +176,6 @@ void Turn()
 
 				result.Die(winner);
 			}
-			return;
 		}
 	}
 }

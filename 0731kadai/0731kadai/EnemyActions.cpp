@@ -5,7 +5,7 @@
 int EnemyActions::RandomCharacter()
 {
 	int randomCharaNum = 0;
-	randomCharaNum = (rand() % 2) + 2;
+	randomCharaNum = (rand() % 3) + 1;
 	
 	std::cout << "敵キャラクターが選択されました。" << std::endl;
 
