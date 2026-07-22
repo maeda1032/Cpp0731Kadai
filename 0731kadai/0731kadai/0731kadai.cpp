@@ -41,6 +41,7 @@ void Turn()
  
 	while (true)
 	{
+		//もし戦力が０ならターン処理を終了
 		if (battlePower[0].battleStatus.battlePower < 0 || battlePower[1].battleStatus.battlePower < 0)
 		{
 			break;
