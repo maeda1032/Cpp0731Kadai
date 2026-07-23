@@ -9,6 +9,14 @@
 #include "SwordsMan.h"
 #include "Wizard.h"
 
+/// <summary>
+/// 両方が攻撃の場合
+/// </summary>
+void BothAttack()
+{
+
+}
+
 void Turn()
 {
 	int player = 0;
@@ -71,11 +79,16 @@ void Turn()
 				if (battleNum == 2)
 				{
 					int attackPower = 0;
+					//カウンター攻撃力を計算
 					attackPower = result.Counter(characters[player - 1]->param.attackPower);
+
+					//自分のHPを減らす
 					battlePower[0].LoserMinusHp(battlePower[0].battleStatus.battlePower, attackPower);
 
+					//コメントの表示
 					std::cout << "enemyのカウンター攻撃" << std::endl;
 
+					//ダメージの表示
 					result.DispBattleInfo(playerAttackDefense + 1, battlePower[0].battleStatus.battlePower, attackPower);
 				}
 				//クリティカルの場合
@@ -83,9 +96,13 @@ void Turn()
 				{
 					int attackPower = 0;
 
+					//クリティカルの攻撃力を設定
 					attackPower = result.Critical(characters[player - 1]->param.attackPower);
+
+					//敵のHPを減らす
 					battlePower[1].LoserMinusHp(battlePower[1].battleStatus.battlePower, attackPower);
 
+					//コメントの表示
 					std::cout << "Playerのクリティカル攻撃" << std::endl;
 
 					result.DispBattleInfo(playerAttackDefense, battlePower[1].battleStatus.battlePower, attackPower);
