@@ -9,14 +9,6 @@
 #include "SwordsMan.h"
 #include "Wizard.h"
 
-/// <summary>
-/// 両方が攻撃の場合
-/// </summary>
-void BothAttack()
-{
-
-}
-
 void Turn()
 {
 	int player = 0;
@@ -156,6 +148,7 @@ void Turn()
 					//敵キャラクターのHPを減らす
 					battlePower[1].LoserMinusHp(battlePower[1].battleStatus.battlePower, characters[player - 1]->param.attackPower);
 
+					//ダメージと残り体力の表記
 					std::cout << "両者攻撃が選択されましたPlayerの攻撃力が高いため敵に" << characters[player - 1]->param.attackPower << "ダメージ入ります" << std::endl;
 					std::cout << "敵残り戦力" << battlePower[1].battleStatus.battlePower << std::endl;
 
@@ -166,11 +159,13 @@ void Turn()
 					//プレイヤーのHPを減らす
 					battlePower[0].LoserMinusHp(battlePower[0].battleStatus.battlePower, characters[randomCharaNum - 1]->param.attackPower);
 
+					//ダメージと残り体力の表記
 					std::cout << "両者攻撃が選択されました敵の攻撃力が高いためプレイヤーに" << characters[randomCharaNum - 1]->param.attackPower << "ダメージ入ります" << std::endl;
 					std::cout << "Player残り戦力" << battlePower[0].battleStatus.battlePower << std::endl;
 
 				}
 			}
+			//引き分けの場合
 			else
 			{
 				result.Draw();
