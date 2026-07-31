@@ -11,7 +11,10 @@
 
 void Turn()
 {
+	//キャラクターの選択
 	int player = 0;
+
+	//攻撃かディフェンスかの選択
 	int playerAttackDefense = 0;
 
 	//敵キャラクターを決める
@@ -19,6 +22,7 @@ void Turn()
 	//敵キャラクターの行動を決める
 	int randomActionNum = 0;
 
+	//バトル結果
 	int battleNum = 0;
 
 	//playerの入力したキーの取得に使用
@@ -33,8 +37,8 @@ void Turn()
 	//0:playerの戦力 1:enemyの戦力
 	BattlePower battlePower[2];
 
-	//攻撃力と
-	std::shared_ptr<Character> characters[3];
+	//攻撃力の決定
+	std::unique_ptr<Character> characters[3];
 	characters[0].reset(new SwordsMan);
 	characters[1].reset(new Wizard);
 	characters[2].reset(new Summoner);
