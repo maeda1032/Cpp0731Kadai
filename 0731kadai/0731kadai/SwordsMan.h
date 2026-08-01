@@ -4,8 +4,9 @@
 
 class SwordsMan:public Character
 {
-public:
+private:
 	void SetAttack() override;
+public:
 
 	SwordsMan()
 	{

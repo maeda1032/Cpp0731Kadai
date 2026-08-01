@@ -4,8 +4,11 @@
 
 class Summoner:public Character
 {
-public:
+
+private:
 	void SetAttack() override;
+
+public:
 
 	Summoner()
 	{

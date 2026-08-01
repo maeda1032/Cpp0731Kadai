@@ -131,6 +131,7 @@
     <ClCompile Include="ResultManagement.cpp" />
     <ClCompile Include="Summoner.cpp" />
     <ClCompile Include="SwordsMan.cpp" />
+    <ClCompile Include="Turn.cpp" />
     <ClCompile Include="Wizard.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="ResultManagement.h" />
     <ClInclude Include="Summoner.h" />
     <ClInclude Include="SwordsMan.h" />
+    <ClInclude Include="Turn.h" />
     <ClInclude Include="Wizard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,8 +4,11 @@
 
 class Wizard:public Character
 {
-public:
+private:
+
 	void SetAttack() override;
+
+public:
 
 	Wizard()
 	{
