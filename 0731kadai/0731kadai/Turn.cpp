@@ -1,7 +1,5 @@
 #include <memory>
 #include "BattlePower.h"
-#include "PlayerActions.h"
-#include "EnemyActions.h"
 #include "ResultManagement.h"
 #include "Summoner.h"
 #include "SwordsMan.h"
@@ -10,9 +8,23 @@
 
 #include <iostream>
 
-void Turn::TurnStart()
+/// <summary>
+/// ターンスタート時にプレイヤーと敵キャラクターの選択
+/// </summary>
+void Turn::TurnStart(std::shared_ptr<PlayerActions> playerPtr,std::shared_ptr<EnemyActions> enemy)
 {
+	//playerのキャラクターを選択する
+	//入力されたキーで異なるキャラクターを使用する配列の中に入れるため-1
+	player = playerPtr->InputCharacterKey();
 
+	//playerの攻撃防御を選択する
+	playerAttackDefense = playerPtr->AttackDefenseKey();
+
+	//敵のキャラクターの決定
+	randomCharaNum = enemy->RandomCharacter();
+
+	//敵の行動の決定
+	randomActionNum = enemy->RandomDefenseAttack();
 }
 
 void Turn::TurnEndCheck(int playerBattlePower,int enemyBattlePower)
@@ -39,28 +51,15 @@ void Turn::TurnEndCheck(int playerBattlePower,int enemyBattlePower)
 
 void Turn::TurnProcess()
 {
-	//キャラクターの選択
-	int player = 0;
-
-	//攻撃かディフェンスかの選択
-	int playerAttackDefense = 0;
-
-	//敵キャラクターを決める
-	int randomCharaNum = 0;
-	//敵キャラクターの行動を決める
-	int randomActionNum = 0;
-
 	//バトル結果
 	int battleNum = 0;
 
 	//playerの入力したキーの取得に使用
-	std::unique_ptr<PlayerActions> playerPtr = std::make_unique<PlayerActions>();
+	std::shared_ptr<PlayerActions> playerPtr = std::make_shared<PlayerActions>();
 
 	//enemyのランダムな数値の取得に使用
-	std::unique_ptr<EnemyActions> enemy = std::make_unique<EnemyActions>();
-
-
-
+	std::shared_ptr<EnemyActions> enemy = std::make_shared<EnemyActions>();
+	
 	//0:playerの戦力 1:enemyの戦力
 	BattlePower battlePower[2];
 
@@ -72,23 +71,7 @@ void Turn::TurnProcess()
 
 	while (true)
 	{
-		//もし戦力が０ならターン処理を終了
-		if (battlePower[0].battleStatus.battlePower < 0 || battlePower[1].battleStatus.battlePower < 0)
-		{
-			break;
-		}
-		//playerのキャラクターを選択する
-		//入力されたキーで異なるキャラクターを使用する配列の中に入れるため-1
-		player = playerPtr->InputCharacterKey();
-
-		//playerの攻撃防御を選択する
-		playerAttackDefense = playerPtr->AttackDefenseKey();
-
-		//敵のキャラクターの決定
-		randomCharaNum = enemy->RandomCharacter();
-
-		//敵の行動の決定
-		randomActionNum = enemy->RandomDefenseAttack();
+		TurnStart(playerPtr, enemy);
 
 		//選択された行動が異なるなら
 		if (playerAttackDefense != randomActionNum)
@@ -204,5 +187,11 @@ void Turn::TurnProcess()
 		}
 
 		TurnEndCheck(battlePower[0].battleStatus.battlePower,battlePower[1].battleStatus.battlePower);
+
+		//もし戦力が０ならターン処理を終了
+		if (battlePower[0].battleStatus.battlePower < 0 || battlePower[1].battleStatus.battlePower < 0)
+		{
+			break;
+		}
 	}
 }
