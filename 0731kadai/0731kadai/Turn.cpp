@@ -15,9 +15,26 @@ void Turn::TurnStart()
 
 }
 
-void Turn::TurnEnd()
+void Turn::TurnEndCheck(int playerBattlePower,int enemyBattlePower)
 {
+	//倒したか確認する
+	if (playerBattlePower < 0 || enemyBattlePower < 0)
+	{
+		if (playerBattlePower > enemyBattlePower)
+		{
+			//playerの勝利
+			int winner = 1;
 
+			result.Die(winner);
+		}
+		if (playerBattlePower < enemyBattlePower)
+		{
+			//enemyの勝利
+			int winner = 2;
+
+			result.Die(winner);
+		}
+	}
 }
 
 void Turn::TurnProcess()
@@ -186,23 +203,6 @@ void Turn::TurnProcess()
 			}
 		}
 
-		//倒したか確認する
-		if (battlePower[0].battleStatus.battlePower < 0 || battlePower[1].battleStatus.battlePower < 0)
-		{
-			if (battlePower[0].battleStatus.battlePower > battlePower[1].battleStatus.battlePower)
-			{
-				//playerの勝利
-				int winner = 1;
-
-				result.Die(winner);
-			}
-			if (battlePower[0].battleStatus.battlePower < battlePower[1].battleStatus.battlePower)
-			{
-				//enemyの勝利
-				int winner = 2;
-
-				result.Die(winner);
-			}
-		}
+		TurnEndCheck(battlePower[0].battleStatus.battlePower,battlePower[1].battleStatus.battlePower);
 	}
 }

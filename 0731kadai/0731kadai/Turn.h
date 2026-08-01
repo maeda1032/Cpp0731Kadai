@@ -1,3 +1,5 @@
+#include "ResultManagement.h"
+
 #pragma once
 class Turn
 {
@@ -6,7 +8,7 @@ public:
 
 	void TurnProcess();
 
-	void TurnEnd();
+	void TurnEndCheck(int playerBattlePower, int enemyBattlePowers);
 
 private:
 	//バトルのメソッドを呼び出すときに使用
